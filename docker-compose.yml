@@ -1,0 +1,31 @@
+services:
+
+  api:
+    build: .
+    container_name: llm_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - .env
+
+  postgres:
+    image: postgres:15
+    container_name: llm_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: llm_system
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    container_name: llm_redis
+    ports:
+      - "6379:6379"

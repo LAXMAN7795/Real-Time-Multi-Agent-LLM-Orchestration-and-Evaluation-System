@@ -1,0 +1,11 @@
+orchestrator/
+__pycache__/
+.env
+*.pyc
+
+.chromadb/
+
+.idea/
+.vscode/
+
+logs/
