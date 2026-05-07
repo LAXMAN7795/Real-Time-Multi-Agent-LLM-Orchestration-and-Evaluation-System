@@ -26,3 +26,11 @@ httpx
 tiktoken
 
 python-json-logger
+
+sentence-transformers
+
+wikipedia
+
+requests
+
+duckduckgo-search
