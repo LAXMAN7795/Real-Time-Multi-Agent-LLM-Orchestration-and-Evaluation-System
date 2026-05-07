@@ -33,4 +33,4 @@ wikipedia
 
 requests
 
-duckduckgo-search
+tavily-python

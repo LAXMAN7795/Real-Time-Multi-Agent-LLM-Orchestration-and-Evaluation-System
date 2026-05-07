@@ -6,13 +6,13 @@ from app.tools.wikipedia_tool import (
     wikipedia_search_tool
 )
 
-from app.tools.duckduckgo_tool import (
-    duckduckgo_search_tool
-)
 from app.tools.mock_search_tool import (
     mock_search_tool
 )
 
+from app.tools.tavily_tool import (
+    tavily_search_tool
+)
 
 SIMILARITY_THRESHOLD = 0.7
 
@@ -37,48 +37,48 @@ def retrieval_node(state):
 
     if len(relevant_rag_chunks) == 0:
 
-        wiki_result = wikipedia_search_tool(query)
+        tavily_result = tavily_search_tool(query)
 
         state["execution_trace"].append({
             "agent": "retrieval_agent",
-            "event": "wikipedia_tool_result",
-            "tool_success": wiki_result.success,
-            "tool_output": wiki_result.content
+            "event": "tavily_tool_result",
+            "tool_success": tavily_result.success,
+            "tool_output": tavily_result.content[:300]
         })
 
         external_tools_used.append(
-            "wikipedia_search"
+            "tavily_search"
         )
 
-        if wiki_result.success:
+        if tavily_result.success:
 
             retrieved_chunks.append({
-                "chunk_id": "wikipedia_result",
-                "content": wiki_result.content,
-                "source": wiki_result.source
+                "chunk_id": "tavily_result",
+                "content": tavily_result.content,
+                "source": tavily_result.source
             })
 
         else:
 
-            ddg_result = duckduckgo_search_tool(query)
+            wiki_result = wikipedia_search_tool(query)
 
             state["execution_trace"].append({
                 "agent": "retrieval_agent",
-                "event": "duckduckgo_tool_result",
-                "tool_success": ddg_result.success,
-                "tool_output": ddg_result.content
+                "event": "wikipedia_tool_result",
+                "tool_success": wiki_result.success,
+                "tool_output": wiki_result.content
             })
 
             external_tools_used.append(
-                "duckduckgo_search"
+                "wikipedia_search"
             )
 
-            if ddg_result.success:
+            if wiki_result.success:
 
                 retrieved_chunks.append({
-                    "chunk_id": "duckduckgo_result",
-                    "content": ddg_result.content,
-                    "source": ddg_result.source
+                    "chunk_id": "wikipedia_result",
+                    "content": wiki_result.content,
+                    "source": wiki_result.source
                 })
 
             else:

@@ -18,3 +18,5 @@ class OrchestratorState(TypedDict):
     execution_trace: List[Dict[str, Any]]
 
     final_response: str
+
+    provenance: List[Dict[str, Any]]

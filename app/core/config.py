@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     REDIS_PORT: int
 
     GROQ_API_KEY: str
+    TAVILY_API_KEY: str
 
     ENVIRONMENT: str
 

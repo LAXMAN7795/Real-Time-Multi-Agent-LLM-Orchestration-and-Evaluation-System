@@ -19,7 +19,8 @@ async def run_orchestrator(payload: dict):
         "retrieved_chunks": [],
         "critique_results": [],
         "execution_trace": [],
-        "final_response": ""
+        "final_response": "",
+        "provenance": []
     }
 
     result = graph.invoke(state)
