@@ -9,6 +9,9 @@ from app.orchestration.nodes.synthesis_node import synthesis_node
 from app.orchestration.nodes.evaluation_node import evaluation_node
 
 from app.orchestration.router import dynamic_router
+from app.orchestration.nodes.security_node import (
+    security_node
+)
 
 
 workflow = StateGraph(OrchestratorState)
@@ -18,6 +21,7 @@ workflow.add_node("retrieval", retrieval_node)
 workflow.add_node("critique", critique_node)
 workflow.add_node("synthesis", synthesis_node)
 workflow.add_node("evaluation", evaluation_node)
+workflow.add_node("security", security_node)
 
 
 workflow.set_conditional_entry_point(
@@ -30,7 +34,9 @@ workflow.set_conditional_entry_point(
 
 workflow.add_edge("decomposition", "retrieval")
 
-workflow.add_edge("retrieval", "critique")
+workflow.add_edge("retrieval", "security")
+
+workflow.add_edge("security", "critique")
 
 workflow.add_edge("critique", "synthesis")
 

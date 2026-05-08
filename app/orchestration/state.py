@@ -22,3 +22,7 @@ class OrchestratorState(TypedDict):
     provenance: List[Dict[str, Any]]
 
     evaluation_result: str
+
+    security_analysis: str
+
+    security_decision: str

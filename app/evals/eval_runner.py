@@ -31,7 +31,10 @@ def run_evaluation_suite():
 
             "provenance": [],
 
-            "evaluation_result": ""
+            "evaluation_result": "",
+            "security_analysis": "",
+
+            "security_decision": ""
 
         }
 

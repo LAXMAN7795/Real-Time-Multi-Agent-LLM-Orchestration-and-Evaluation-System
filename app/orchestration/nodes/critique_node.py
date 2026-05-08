@@ -2,6 +2,9 @@ from datetime import datetime
 
 
 def critique_node(state):
+    if state.get("security_decision") == "blocked":
+
+        return state
 
     critique = {
         "claim": "Renewable adoption increased",

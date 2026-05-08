@@ -10,6 +10,9 @@ from app.llm.prompts.evaluation_prompt import (
 
 
 def evaluation_node(state):
+    if state.get("security_decision") == "blocked":
+
+        return state
 
     retrieved_chunks = state["retrieved_chunks"]
 
