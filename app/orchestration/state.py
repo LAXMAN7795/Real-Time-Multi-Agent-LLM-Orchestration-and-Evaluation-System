@@ -20,3 +20,5 @@ class OrchestratorState(TypedDict):
     final_response: str
 
     provenance: List[Dict[str, Any]]
+
+    evaluation_result: str

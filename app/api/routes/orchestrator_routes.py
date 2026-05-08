@@ -20,7 +20,8 @@ async def run_orchestrator(payload: dict):
         "critique_results": [],
         "execution_trace": [],
         "final_response": "",
-        "provenance": []
+        "provenance": [],
+        "evaluation_result": ""
     }
 
     result = graph.invoke(state)

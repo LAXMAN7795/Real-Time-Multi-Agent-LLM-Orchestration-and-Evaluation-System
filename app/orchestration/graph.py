@@ -6,6 +6,7 @@ from app.orchestration.nodes.decomposition_node import decomposition_node
 from app.orchestration.nodes.retrieval_node import retrieval_node
 from app.orchestration.nodes.critique_node import critique_node
 from app.orchestration.nodes.synthesis_node import synthesis_node
+from app.orchestration.nodes.evaluation_node import evaluation_node
 
 from app.orchestration.router import dynamic_router
 
@@ -16,6 +17,7 @@ workflow.add_node("decomposition", decomposition_node)
 workflow.add_node("retrieval", retrieval_node)
 workflow.add_node("critique", critique_node)
 workflow.add_node("synthesis", synthesis_node)
+workflow.add_node("evaluation", evaluation_node)
 
 
 workflow.set_conditional_entry_point(
@@ -32,6 +34,8 @@ workflow.add_edge("retrieval", "critique")
 
 workflow.add_edge("critique", "synthesis")
 
-workflow.add_edge("synthesis", END)
+workflow.add_edge("synthesis", "evaluation")
+
+workflow.add_edge("evaluation", END)
 
 graph = workflow.compile()
