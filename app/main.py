@@ -9,6 +9,10 @@ from app.api.routes.db_test_routes import router as db_test_router
 from app.api.routes.orchestrator_routes import router as orchestrator_router
 from app.api.routes.rag_routes import router as rag_router
 
+from app.api.routes.stream_routes import (
+    router as stream_router
+)
+
 
 app = FastAPI(
     title=settings.APP_NAME
@@ -18,6 +22,7 @@ app.include_router(context_router)
 app.include_router(db_test_router)
 app.include_router(orchestrator_router)
 app.include_router(rag_router)
+app.include_router(stream_router)
 
 
 @app.on_event("startup")
