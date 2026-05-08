@@ -15,6 +15,9 @@ from app.core.prompt_store import (
 
 
 def improvement_node(state):
+    if state.get("is_eval_mode"):
+
+        return state
     if state.get("security_decision") == "blocked":
 
         return state
