@@ -32,3 +32,5 @@ class OrchestratorState(TypedDict):
     improvement_analysis: str
 
     retry_recommended: bool
+
+    rewrite_id: str

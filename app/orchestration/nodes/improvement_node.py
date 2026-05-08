@@ -7,6 +7,11 @@ from app.llm.services.llm_service import (
 from app.llm.prompts.improvement_prompt import (
     IMPROVEMENT_SYSTEM_PROMPT
 )
+import uuid
+
+from app.core.prompt_store import (
+    PROMPT_REWRITE_STORE
+)
 
 
 def improvement_node(state):
@@ -42,6 +47,28 @@ def improvement_node(state):
     state["improvement_analysis"] = (
         improvement_analysis
     )
+    rewrite_id = str(uuid.uuid4())
+
+    PROMPT_REWRITE_STORE[rewrite_id] = {
+
+        "rewrite_id": rewrite_id,
+
+        "job_id": state["job_id"],
+
+        "original_evaluation":
+            evaluation_result,
+
+        "proposed_rewrite":
+            improvement_analysis,
+
+        "status": "pending",
+
+        "timestamp":
+            datetime.utcnow().isoformat()
+
+    }
+
+    state["rewrite_id"] = rewrite_id
 
     state["execution_trace"].append({
 

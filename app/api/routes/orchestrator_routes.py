@@ -27,7 +27,8 @@ async def run_orchestrator(payload: dict):
         "security_decision": "",
         "context_budget": {},
         "improvement_analysis": "",
-        "retry_recommended": False
+        "retry_recommended": False,
+        "rewrite_id": ""
     }
 
     result = graph.invoke(state)

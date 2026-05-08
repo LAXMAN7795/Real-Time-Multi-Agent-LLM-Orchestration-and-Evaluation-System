@@ -37,7 +37,8 @@ def run_evaluation_suite():
             "security_decision": "",
             "context_budget": {},
             "improvement_analysis": "",
-            "retry_recommended": False
+            "retry_recommended": False,
+            "rewrite_id": ""
 
         }
 
