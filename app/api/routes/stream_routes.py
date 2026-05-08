@@ -38,7 +38,8 @@ async def event_generator(query: str):
         "evaluation_result": "",
         "security_analysis": "",
 
-        "security_decision": ""
+        "security_decision": "",
+        "context_budget": {}
 
     }
 

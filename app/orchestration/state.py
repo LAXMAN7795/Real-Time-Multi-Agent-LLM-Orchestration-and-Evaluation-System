@@ -26,3 +26,5 @@ class OrchestratorState(TypedDict):
     security_analysis: str
 
     security_decision: str
+
+    context_budget: Dict[str, Any]

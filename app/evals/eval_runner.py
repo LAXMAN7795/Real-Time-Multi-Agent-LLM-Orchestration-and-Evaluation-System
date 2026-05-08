@@ -34,7 +34,8 @@ def run_evaluation_suite():
             "evaluation_result": "",
             "security_analysis": "",
 
-            "security_decision": ""
+            "security_decision": "",
+            "context_budget": {}
 
         }
 

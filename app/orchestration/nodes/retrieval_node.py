@@ -13,6 +13,9 @@ from app.tools.mock_search_tool import (
 from app.tools.tavily_tool import (
     tavily_search_tool
 )
+from app.context.context_manager import (
+    apply_context_budget
+)
 
 SIMILARITY_THRESHOLD = 0.7
 
@@ -104,14 +107,45 @@ def retrieval_node(state):
                         "source": mock_result.source
                     })
 
-    state["retrieved_chunks"] = retrieved_chunks
+    budgeted_context = apply_context_budget(
+        retrieved_chunks
+    )
+
+    state["retrieved_chunks"] = (
+        budgeted_context["selected_chunks"]
+    )
+
+    state["context_budget"] = {
+
+        "estimated_tokens":
+            budgeted_context["estimated_tokens"],
+
+        "max_tokens": 3000,
+
+        "chunks_after_budget":
+            len(
+                budgeted_context["selected_chunks"]
+            )
+    }
 
     state["execution_trace"].append({
+
         "agent": "retrieval_agent",
+
         "event": "adaptive_retrieval_completed",
+
         "timestamp": datetime.utcnow().isoformat(),
-        "chunks_count": len(retrieved_chunks),
-        "external_tools_used": external_tools_used
+
+        "chunks_count": len(
+            state["retrieved_chunks"]
+        ),
+
+        "external_tools_used":
+            external_tools_used,
+
+        "context_budget":
+            state["context_budget"]
+
     })
 
     return state
