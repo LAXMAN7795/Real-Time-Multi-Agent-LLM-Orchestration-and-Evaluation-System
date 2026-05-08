@@ -28,3 +28,7 @@ class OrchestratorState(TypedDict):
     security_decision: str
 
     context_budget: Dict[str, Any]
+
+    improvement_analysis: str
+
+    retry_recommended: bool

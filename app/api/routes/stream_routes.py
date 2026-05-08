@@ -39,7 +39,9 @@ async def event_generator(query: str):
         "security_analysis": "",
 
         "security_decision": "",
-        "context_budget": {}
+        "context_budget": {},
+        "improvement_analysis": "",
+        "retry_recommended": False
 
     }
 

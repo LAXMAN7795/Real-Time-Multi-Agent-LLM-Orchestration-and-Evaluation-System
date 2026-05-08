@@ -12,6 +12,9 @@ from app.orchestration.router import dynamic_router
 from app.orchestration.nodes.security_node import (
     security_node
 )
+from app.orchestration.nodes.improvement_node import (
+    improvement_node
+)
 
 
 workflow = StateGraph(OrchestratorState)
@@ -22,6 +25,7 @@ workflow.add_node("critique", critique_node)
 workflow.add_node("synthesis", synthesis_node)
 workflow.add_node("evaluation", evaluation_node)
 workflow.add_node("security", security_node)
+workflow.add_node("improvement",improvement_node)
 
 
 workflow.set_conditional_entry_point(
@@ -42,6 +46,8 @@ workflow.add_edge("critique", "synthesis")
 
 workflow.add_edge("synthesis", "evaluation")
 
-workflow.add_edge("evaluation", END)
+workflow.add_edge("evaluation","improvement")
+
+workflow.add_edge("improvement",END)
 
 graph = workflow.compile()
