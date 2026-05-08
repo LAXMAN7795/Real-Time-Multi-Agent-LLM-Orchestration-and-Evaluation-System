@@ -13,6 +13,14 @@ from app.api.routes.stream_routes import (
     router as stream_router
 )
 
+from app.api.routes.trace_routes import (
+    router as trace_router
+)
+
+from app.api.routes.eval_routes import (
+    router as eval_router
+)
+
 
 app = FastAPI(
     title=settings.APP_NAME
@@ -23,6 +31,8 @@ app.include_router(db_test_router)
 app.include_router(orchestrator_router)
 app.include_router(rag_router)
 app.include_router(stream_router)
+app.include_router(trace_router)
+app.include_router(eval_router)
 
 
 @app.on_event("startup")

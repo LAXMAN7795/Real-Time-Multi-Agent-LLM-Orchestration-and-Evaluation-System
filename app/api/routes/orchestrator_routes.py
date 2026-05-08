@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from uuid import uuid4
 
 from app.orchestration.graph import graph
+from app.core.job_store import JOB_STORE
 
 
 router = APIRouter()
@@ -25,5 +26,7 @@ async def run_orchestrator(payload: dict):
     }
 
     result = graph.invoke(state)
+
+    JOB_STORE[result["job_id"]] = result
 
     return result
