@@ -42,7 +42,8 @@ def run_evaluation_suite():
             "improvement_analysis": "",
             "retry_recommended": False,
             "rewrite_id": "",
-            "is_eval_mode": True
+            "is_eval_mode": True,
+            "evaluation_metrics": {}
 
         }
 

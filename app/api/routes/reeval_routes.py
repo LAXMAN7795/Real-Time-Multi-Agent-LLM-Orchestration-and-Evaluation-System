@@ -57,7 +57,9 @@ async def rerun_failed_evals():
 
             "retry_recommended": False,
 
-            "rewrite_id": ""
+            "rewrite_id": "",
+
+            "evaluation_metrics": {}
 
         }
 

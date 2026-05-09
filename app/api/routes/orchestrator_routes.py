@@ -29,7 +29,8 @@ async def run_orchestrator(payload: dict):
         "improvement_analysis": "",
         "retry_recommended": False,
         "rewrite_id": "",
-        "is_eval_mode": False
+        "is_eval_mode": False,
+        "evaluation_metrics": {}
     }
 
     result = graph.invoke(state)

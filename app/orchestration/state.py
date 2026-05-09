@@ -36,3 +36,5 @@ class OrchestratorState(TypedDict):
     rewrite_id: str
 
     is_eval_mode: bool
+
+    evaluation_metrics: Dict[str, Any]
