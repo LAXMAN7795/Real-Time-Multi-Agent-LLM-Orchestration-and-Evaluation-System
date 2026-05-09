@@ -367,12 +367,48 @@ The orchestration platform supports evaluation-driven prompt rewrites, governanc
 
 ---
 
+# Environment Configuration
+
+Create a `.env` file in the project root.
+
+```env
+APP_NAME=LLM Orchestrator System
+
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=llm_system
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+
+REDIS_HOST=redis
+REDIS_PORT=6379
+
+GROQ_API_KEY=your_groq_api_key
+TAVILY_API_KEY=your_tavily_api_key
+
+ENVIRONMENT=development
+```
+
+---
+
+# LLM Provider
+
+This project uses **Groq-hosted LLM models** instead of OpenAI models.
+
+Supported Groq model examples:
+
+- llama3-70b-8192
+- llama3-8b-8192
+- mixtral-8x7b-32768
+
+---
+
 # Full Setup Instructions
 
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/LAXMAN7795/Real-Time-Multi-Agent-LLM-Orchestration-and-Evaluation-System.git
+git clone <repository-url>
 
 cd Real-Time-Multi-Agent-LLM-Orchestration-and-Evaluation-System
 ```
@@ -407,26 +443,36 @@ pip install -r requirements.txt
 
 ---
 
-## 4. Configure Environment Variables
+# Running Locally
 
-Create `.env` file:
+When running locally without Docker, update `.env`:
 
 ```env
-TAVILY_API_KEY=your_api_key
-OPENAI_API_KEY=your_api_key
-DATABASE_URL=your_database_url
-REDIS_URL=your_redis_url
+POSTGRES_HOST=localhost
+REDIS_HOST=localhost
 ```
 
 ---
 
-## 5. Run Locally
+## Terminal 1 — Start PostgreSQL + Redis
+
+```bash
+docker compose up postgres redis
+```
+
+---
+
+## Terminal 2 — Start FastAPI Application
+
+```bash
+orchestrator\Scripts\activate
+```
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-API Docs:
+Swagger Documentation:
 
 ```bash
 http://localhost:8000/docs
@@ -436,16 +482,49 @@ http://localhost:8000/docs
 
 # Docker Deployment
 
-## Build and Run
+When running full Docker infrastructure, restore `.env`:
 
-```bash
-docker compose up --build
+```env
+POSTGRES_HOST=postgres
+REDIS_HOST=redis
 ```
 
-## Check Running Containers
+---
+
+## Build Docker Infrastructure
+
+```bash
+docker compose build
+```
+
+---
+
+## Run Full Infrastructure
+
+```bash
+docker compose up
+```
+
+---
+
+## Verify Running Containers
 
 ```bash
 docker compose ps
+```
+
+Expected services:
+
+- llm_api
+- llm_postgres
+- llm_redis
+
+---
+
+## Stop Infrastructure
+
+```bash
+docker compose down
 ```
 
 ---
@@ -474,6 +553,8 @@ Example test categories:
 # Known Limitations
 
 This project intentionally documents realistic limitations.
+
+---
 
 ## 1. External Retrieval Dependency
 
@@ -601,7 +682,7 @@ Future roadmap areas include:
 |---|---|
 | Backend | FastAPI, Python |
 | Orchestration | LangGraph |
-| LLM Integration | OpenAI APIs |
+| LLM Integration | Groq API |
 | Retrieval | Tavily Search, RAG |
 | Database | PostgreSQL |
 | Caching | Redis |
@@ -630,8 +711,6 @@ The focus of the system is not merely response generation, but robust orchestrat
 
 # Author
 
-**Laxman Sannu Gouda**
+## Laxman Sannu Gouda
 
-GitHub Repository:
-
-https://github.com/LAXMAN7795/Real-Time-Multi-Agent-LLM-Orchestration-and-Evaluation-System
+Email: laxman.sg0104@gmail.com
