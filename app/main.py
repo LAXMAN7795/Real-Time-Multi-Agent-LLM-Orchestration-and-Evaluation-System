@@ -27,6 +27,9 @@ from app.api.routes.prompt_routes import (
 from app.api.routes.reeval_routes import (
     router as reeval_router
 )
+from app.api.routes.eval_summary_routes import (
+    router as eval_summary_router
+)
 
 app = FastAPI(
     title=settings.APP_NAME
@@ -41,6 +44,7 @@ app.include_router(trace_router)
 app.include_router(eval_router)
 app.include_router(prompt_router)
 app.include_router(reeval_router)
+app.include_router(eval_summary_router)
 
 
 @app.on_event("startup")
